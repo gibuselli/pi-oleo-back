@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from pydantic import BaseModel
 
@@ -10,7 +12,7 @@ class Donator(User):
     id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
-    telephone = Column(String, nullable=False)
+    telephone = Column(String, nullable=True)
 
     __mapper_args__ = {
         'polymorphic_identity': 'donator'
@@ -21,8 +23,8 @@ class DonatorRequest(BaseModel):
     surname: str
     email: str
     password: str
-    telephone: str
-    user_type: str
+    telephone: Optional[str] = ''
+    user_type: str = 'doador'
 
 
 class DonatorResponse(BaseModel):

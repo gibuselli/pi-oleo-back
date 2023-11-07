@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 
@@ -9,13 +11,13 @@ from services import user_service
 router = APIRouter()
 
 
-@router.get(path="/donators/", description="Lista todos os usuários doadores", response_model=list[DonatorListResponse])
+@router.get(path="/donators/", description="Lista todos os usuários doadores", response_model=List[DonatorListResponse])
 def get_all_donators(db: Session = Depends(get_db)):
     return user_service.get_donators(db)
 
 @router.get(path="/collectors/",
             description="Lista todos os usuários coletores",
-            response_model=list[CollectorListResponse])
+            response_model=List[CollectorListResponse])
 def get_all_collectors(db: Session = Depends(get_db)):
     return user_service.get_collectors(db)
 

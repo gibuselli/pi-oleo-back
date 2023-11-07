@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
@@ -24,12 +26,12 @@ class CollectorRequest(BaseModel):
     email: str
     password: str
     document: str
-    telephone: str
+    telephone: Optional[str] = ''
     cep: str
     address: str
     district: str
     allow_delivery: bool
-    user_type: str
+    user_type: str = 'retirador'
 
 class CollectorResponse(BaseModel):
     msg: str
