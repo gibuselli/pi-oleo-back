@@ -19,4 +19,8 @@ def register_oil_donation(
 
     oil_service.create_oil_donation(request, db, current_user)
 
-    return Response(status_code=201, content="Óleo para doação cadastrado com sucesso.")
+    return Response(status_code=201)
+
+@router.get(path="/my-oil/", description="Consulta quando a doação será retirada")
+def get_oil_donation(current_user: User = Depends(auth_service.get_current_user), db: Session = Depends(get_db)):
+    return oil_service.get_oil_donation(current_user, db)

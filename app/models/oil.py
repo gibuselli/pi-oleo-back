@@ -29,3 +29,7 @@ class OilRequest(BaseModel):
     complement: Optional[str] = ''
     day_available: Optional[str] = ''
     telephone: Optional[str] = ''
+
+class OilDonationResponse(BaseModel):
+    oil_quantity: int
+    day: Optional[str] = ''
