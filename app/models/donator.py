@@ -24,7 +24,6 @@ class DonatorRequest(BaseModel):
     email: str
     password: str
     telephone: Optional[str] = ''
-    user_type: str = 'doador'
 
 
 class DonatorResponse(BaseModel):

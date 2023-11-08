@@ -31,7 +31,6 @@ class CollectorRequest(BaseModel):
     address: str
     district: str
     allow_delivery: bool
-    user_type: str = 'retirador'
 
 class CollectorResponse(BaseModel):
     msg: str
