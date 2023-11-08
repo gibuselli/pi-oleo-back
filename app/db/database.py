@@ -44,18 +44,18 @@ def seed_data():
 
     try:
         donator = Donator(
-            email="donator@example.com",
+            email="donator@donator.com",
             name="donator",
             surname="fernandes",
-            hashed_password="donator",
+            hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             telephone="11912345678"
         )
 
         collector = Collector(
             document="12345560-12",
-            email="collector@example.com",
+            email="collector@collector.com",
             telephone="11912345678",
-            hashed_password="collector",
+            hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             cep="0123012",
             address="aquela rua lá",
             district="aquele bairro lá",
