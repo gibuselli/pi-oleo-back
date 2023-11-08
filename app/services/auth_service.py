@@ -36,7 +36,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if not user:
         raise HTTPException(status_code=401, detail="Erro ao validar credenciais")
 
-    return user.email
+    return user
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
