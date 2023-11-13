@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models.collector import Collector, CollectorRequest
+from models.collector import Collector, CollectorRequest, CollectorResponse, convert_list_to_response
 from models.donator import Donator, DonatorRequest
 from models.user import User
 from services.auth_service import hash_password
@@ -9,20 +9,10 @@ from services.auth_service import hash_password
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
-def get_donator_by_email(db: Session, email: str):
-    return db.query(Donator).filter(Donator.email == email).first()
 
-
-def get_collector_by_email(db: Session, email: str):
-    return db.query(Collector).filter(Collector.email == email).first()
-
-
-def get_donators(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Donator).offset(skip).limit(limit).all()
-
-
-def get_collectors(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Collector).offset(skip).limit(limit).all()
+def get_delivery_collectors(db: Session):
+    collectors = db.query(Collector).filter(Collector.allow_delivery).all()
+    return convert_list_to_response(collectors)
 
 
 def create_donator(db: Session, request: DonatorRequest):
@@ -38,13 +28,13 @@ def create_donator(db: Session, request: DonatorRequest):
 
     db.add(new_donator)
     db.commit()
-    db.close()
 
 
 def create_collector(db: Session, request: CollectorRequest):
     hashed_password = hash_password(request.password)
 
     new_collector = Collector(
+        name="nome",
         document=request.document,
         email=request.email,
         telephone=request.telephone,
@@ -57,4 +47,3 @@ def create_collector(db: Session, request: CollectorRequest):
 
     db.add(new_collector)
     db.commit()
-    db.close()

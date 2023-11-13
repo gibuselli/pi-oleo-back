@@ -1,7 +1,8 @@
 from typing import Optional
 
 from pydantic import BaseModel
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy.orm import relationship
 
 from models.base import Base
 
@@ -10,7 +11,7 @@ class Oil(Base):
     __tablename__ = "oil"
 
     id = Column(Integer, primary_key=True)
-    user = Column(Integer, ForeignKey('user.id'), nullable=False)
+    donator_id = Column(Integer, ForeignKey('donator.id'), nullable=False)
     oil_quantity = Column(Integer, nullable=False)
     cep = Column(String, nullable=False)
     district = Column(String, nullable=False)
@@ -19,6 +20,11 @@ class Oil(Base):
     complement = Column(String, nullable=True)
     day_available = Column(String, nullable=True)
     telephone = Column(String, nullable=True)
+    is_available = Column(Boolean, nullable=False)
+
+    # relationships
+    donator = relationship("Donator", back_populates="oil", uselist=False)
+    oil_collect = relationship("OilCollect", back_populates="oil", uselist=False)
 
 class OilRequest(BaseModel):
     oil_quantity: int

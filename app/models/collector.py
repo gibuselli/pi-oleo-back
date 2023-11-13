@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
@@ -10,6 +10,7 @@ class Collector(User):
     __tablename__ = "collector"
 
     id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    name = Column(String)
     document = Column(String)
     telephone = Column(String)
     cep = Column(String)
@@ -23,6 +24,7 @@ class Collector(User):
 
 
 class CollectorRequest(BaseModel):
+    name: str
     email: str
     password: str
     document: str
@@ -32,15 +34,19 @@ class CollectorRequest(BaseModel):
     district: str
     allow_delivery: bool
 
+
 class CollectorResponse(BaseModel):
-    msg: str
+    name: str
+    address: str
 
 
 class CollectorListResponse(BaseModel):
-    email: str
-    telephone: str
-    cep: str
-    address: str
-    district: str
-    document: str
-    allow_delivery: bool
+    collectors: List[CollectorResponse]
+
+
+def convert_to_collector_response(collector: Collector) -> CollectorResponse:
+    return CollectorResponse(name=collector.name, address=collector.address)
+
+
+def convert_list_to_response(collectors: List[Collector]) -> List[CollectorResponse]:
+    return [convert_to_collector_response(collector) for collector in collectors]
