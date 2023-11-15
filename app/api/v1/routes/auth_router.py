@@ -27,27 +27,9 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/quem-vai-pagar-o-habibao/")
-def protected_resource(current_user: User = Depends(auth_service.get_current_user)):
-    esfiha_payer = ["Ivan",
-                    "Mari",
-                    "Bob",
-                    "Rodrigo",
-                    "Edson",
-                    "Ocimar",
-                    "Nayara"
-                    ]
-
-    return {
-        "msg": "Parabéns! Você acessou o endpoint secreto e agora vai descobrir quem vai pagar o próximo rodízio do "
-               "Habibão!",
-        "rodizio_por_conta_de": random.choice(esfiha_payer),
-        "user": current_user.email}
-
-
 @router.get("/current-user/")
 def get_current_user(current_user: User = Depends(auth_service.get_current_user)):
-    return {"email": current_user.email, "user_type": current_user.user_type}
+    return {"email": current_user.email, "user_type.py": current_user.user_type}
 
 @router.post("/validate_token/")
 def validate_token(token: str):
