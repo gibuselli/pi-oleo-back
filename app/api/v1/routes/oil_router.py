@@ -51,8 +51,10 @@ def register_oil_collect(
 
 
 @router.get(path="/oil/districts", description="Consulta bairros com doações em aberto")
-def get_donation_districts(current_user: User = Depends(auth_service.get_current_user), db: Session = Depends(get_db)):
-    verify_user_type(UserType.COLLECTOR.value, current_user)
+def get_donation_districts(
+        # current_user: User = Depends(auth_service.get_current_user), 
+        db: Session = Depends(get_db)):
+    # verify_user_type(UserType.COLLECTOR.value, current_user)
 
     return oil_service.get_available_donation_districts(db)
 
