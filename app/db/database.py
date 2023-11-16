@@ -51,7 +51,7 @@ def seed_data():
     try:
         doador1 = Donator(
             email="doador1@doador.com",
-            name="doador da silva",
+            name="Aline Silva",
             surname="fernandes",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             telephone="11912345678"
@@ -59,7 +59,7 @@ def seed_data():
 
         doador2 = Donator(
             email="doador2@doador.com",
-            name="doador fernandes",
+            name="Nicolas Fernandes",
             surname="da silva",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             telephone="11912345678"
@@ -67,7 +67,7 @@ def seed_data():
 
         doador3 = Donator(
             email="doador3@doador.com",
-            name="doador silva",
+            name="Pedro Silva Albuquerque",
             surname="de fernandes",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             telephone="11912345678"
@@ -75,45 +75,45 @@ def seed_data():
 
         doador4 = Donator(
             email="doador4@doador.com",
-            name="doador",
+            name="Giovani Nascimento",
             surname="quatro",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             telephone="11912345678"
         )
 
         retirador1 = Collector(
-            name="retirador LTDA",
+            name="Eco ABC",
             document="12345560-12",
             email="retirador@retirador.com",
             telephone="11912345678",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             cep="0123012",
-            address="rua X",
-            district="bairro X",
+            address="Av. Pery Ronchetti, 1625",
+            district="Nova Petrópolis",
             allow_delivery=True
         )
 
         retirador2 = Collector(
-            name="retirador ME",
+            name="Pego Oleo",
             document="12345560-12",
             email="retirador1@retirador.com",
             telephone="11912345678",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             cep="0123012",
-            address="rua Y",
-            district="bairro Y",
+            address="R. Ana Neri, 365",
+            district="Vila Metalurgica",
             allow_delivery=True
         )
 
         retirador3 = Collector(
-            name="retirador SA",
+            name="Bio Coleta de Oleo Usado",
             document="12345560-12",
             email="collector@collector.com",
             telephone="11912345678",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
             cep="0123012",
-            address="rua Z",
-            district="bairro Z",
+            address="Av. Manuel Velho Moreira, 1148",
+            district="Parque Colonial",
             allow_delivery=False
         )
 
@@ -127,10 +127,10 @@ def seed_data():
         oil1 = Oil(
             oil_quantity=10,
             cep="0012312",
-            district="vila prudente",
-            address="rua X",
-            address_number=10,
-            complement="apto X",
+            district="Vila Prudente",
+            address="Rua do Orfanato",
+            address_number=109,
+            complement="apto 5",
             day_available="sabado",
             telephone="11992391923",
             is_available=True,
@@ -140,10 +140,10 @@ def seed_data():
         oil2 = Oil(
             oil_quantity=20,
             cep="0012312",
-            district="sapopemba",
-            address="rua X",
+            district="Sapopemba",
+            address="R. Francesco Usper",
             address_number=20,
-            complement="apto X",
+            complement="",
             day_available="domingo",
             telephone="11992391923",
             is_available=True,
@@ -153,7 +153,7 @@ def seed_data():
         oil3 = Oil(
             oil_quantity=30,
             cep="0012312",
-            district="sao lucas",
+            district="São Lucas",
             address="rua X",
             address_number=20,
             complement="apto X",
@@ -166,7 +166,7 @@ def seed_data():
         oil4 = Oil(
             oil_quantity=40,
             cep="0012312",
-            district="vila prudente",
+            district="Vila Prudente",
             address="rua X",
             address_number=10,
             complement="apto X",
