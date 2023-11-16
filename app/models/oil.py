@@ -31,7 +31,7 @@ class OilRequest(BaseModel):
     cep: str
     district: str
     address: str
-    address_number: Optional[str]
+    address_number: str
     complement: Optional[str] = ''
     day_available: Optional[str] = ''
     telephone: Optional[str] = ''
