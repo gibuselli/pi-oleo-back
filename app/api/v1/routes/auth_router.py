@@ -29,7 +29,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
 
 @router.get("/current-user/")
 def get_current_user(current_user: User = Depends(auth_service.get_current_user)):
-    return {"email": current_user.email, "user_type.py": current_user.user_type}
+    return {"email": current_user.email, "user_type": current_user.user_type, "name": current_user.name}
 
 @router.post("/validate_token/")
 def validate_token(token: str):

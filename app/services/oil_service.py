@@ -6,9 +6,17 @@ from sqlalchemy.orm import Session
 from models.oil import OilRequest, Oil, OilDonationResponse
 from models.oil_collect import OilCollectRequest, OilCollect
 from models.user import User
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 def create_oil_donation(request: OilRequest, db: Session, user: User):
+    existing_oil: Optional[Oil] = db.query(Oil).filter(Oil.donator_id == user.id).first()
+
+    if existing_oil:
+        update_oil_donation(existing_oil, request, db)
+        return
+
     new_oil = Oil(
         donator=user,
         oil_quantity=request.oil_quantity,
@@ -21,8 +29,17 @@ def create_oil_donation(request: OilRequest, db: Session, user: User):
         telephone=request.telephone,
         is_available=True
     )
+    try:
+        db.add(new_oil)
+    except:
+        db.merge(new_oil)
+    db.commit()
 
-    db.add(new_oil)
+def update_oil_donation(oil: Oil, request: OilRequest, db: Session):
+    for field, value in request.model_dump().items():
+        if hasattr(oil, field):
+            setattr(oil, field, value)
+
     db.commit()
 
 def create_oil_collect(request: OilCollectRequest, db: Session):

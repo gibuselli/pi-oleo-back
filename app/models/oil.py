@@ -16,7 +16,7 @@ class Oil(Base):
     cep = Column(String, nullable=False)
     district = Column(String, nullable=False)
     address = Column(String, nullable=False)
-    address_number = Column(Integer, nullable=False)
+    address_number = Column(String, nullable=False)
     complement = Column(String, nullable=True)
     day_available = Column(String, nullable=True)
     telephone = Column(String, nullable=True)
@@ -31,7 +31,7 @@ class OilRequest(BaseModel):
     cep: str
     district: str
     address: str
-    address_number: int
+    address_number: str
     complement: Optional[str] = ''
     day_available: Optional[str] = ''
     telephone: Optional[str] = ''

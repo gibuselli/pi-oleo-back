@@ -20,9 +20,6 @@ def get_all_collectors(db: Session = Depends(get_db)):
 
 @router.post(path="/donator/", description="Cria um usuário doador")
 def create_donator(request: DonatorRequest, db: Session = Depends(get_db)):
-    if request.user_type != "doador":
-        raise HTTPException(status_code=400, detail="Tipo de usuário incorreto.")
-
     existing_donator = user_service.get_user_by_email(db, request.email)
 
     if existing_donator:
@@ -35,9 +32,6 @@ def create_donator(request: DonatorRequest, db: Session = Depends(get_db)):
 
 @router.post(path="/collector/", description="Cria um usuário retirador")
 def create_collector(request: CollectorRequest, db: Session = Depends(get_db)):
-    if request.user_type != "retirador":
-        raise HTTPException(status_code=400, detail="Tipo de usuário incorreto.")
-
     existing_collector = user_service.get_user_by_email(db, request.email)
 
     if existing_collector:
