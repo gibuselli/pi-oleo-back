@@ -21,8 +21,10 @@ def create_oil_donation(request: OilRequest, db: Session, user: User):
         telephone=request.telephone,
         is_available=True
     )
-
-    db.add(new_oil)
+    try:
+        db.add(new_oil)
+    except:
+        db.merge(new_oil)
     db.commit()
 
 def create_oil_collect(request: OilCollectRequest, db: Session):
