@@ -1,3 +1,5 @@
+import os
+
 import datetime
 
 from sqlalchemy import create_engine
@@ -10,7 +12,7 @@ from models.donator import Donator
 from models.oil import Oil
 from models.oil_collect import OilCollect
 
-DB_URL = 'sqlite:///oleo-descarte.sqlite3'
+DB_URL = os.getenv("DB_URL")
 
 engine = create_engine(DB_URL, connect_args={'check_same_thread': False})
 sessionlocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
