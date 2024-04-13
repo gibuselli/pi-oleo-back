@@ -14,7 +14,7 @@ from models.oil_collect import OilCollect
 
 DB_URL = os.getenv("DB_URL")
 
-engine = create_engine(DB_URL, connect_args={'check_same_thread': False})
+engine = create_engine(DB_URL)
 sessionlocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 metadata = Base.metadata
 
