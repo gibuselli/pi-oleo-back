@@ -22,7 +22,7 @@ app.include_router(user_router.router)
 app.include_router(oil_router.router)
 
 
-@app.on_event("startup")
-async def startup_event():
-    drop_tables()
-    create_tables()
+# @app.on_event("startup")
+# async def startup_event():
+#     drop_tables()
+#     create_tables()

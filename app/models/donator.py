@@ -13,7 +13,8 @@ class Donator(User):
     id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
-    telephone = Column(String, nullable=True)
+    score = Column(Integer, default=0)
+    level = Column(Integer, default=0)
 
     oil = relationship("Oil", back_populates="donator", uselist=False)
 
@@ -34,3 +35,10 @@ class DonatorListResponse(BaseModel):
     name: str
     surname: str
     telephone: str
+    score: int
+    level: int
+
+class DonatorScoreResponse(BaseModel):
+    score: int
+    is_old: bool
+    level: int

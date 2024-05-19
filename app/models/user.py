@@ -10,6 +10,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+    telephone = Column(String, nullable=True)
     user_type = Column(String, nullable=False)
 
     __mapper_args__ = {
