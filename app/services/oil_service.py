@@ -50,11 +50,14 @@ def create_oil_donation(request: OilRequest, db: Session, user: User):
     db.commit()
 
 def update_oil_donation(oil: Oil, request: OilRequest, db: Session, donator: Donator):
+    exclude_fields = {'oil_quantity'}
+    
     for field, value in request.model_dump().items():
-        if hasattr(oil, field):
+        if hasattr(oil, field) and field not in exclude_fields:
             setattr(oil, field, value)
             
-    oil.last_donation_date = datetime.today().date()       
+    oil.last_donation_date = datetime.today().date()   
+    oil.oil_quantity += request.oil_quantity
             
     update_user_score(donator, request.oil_quantity)
 
