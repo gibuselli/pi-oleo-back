@@ -3,7 +3,6 @@ import os
 import datetime
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 from models.base import Base
@@ -12,7 +11,16 @@ from models.donator import Donator
 from models.oil import Oil
 from models.oil_collect import OilCollect
 
+from datetime import date
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
 DB_URL = os.getenv("DB_URL")
+
+if not DB_URL:
+    raise ValueError("DB_URL environment variable is not set")
 
 engine = create_engine(DB_URL)
 sessionlocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -56,7 +64,9 @@ def seed_data():
             name="Aline Silva",
             surname="fernandes",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
-            telephone="11912345678"
+            telephone="11912345678",
+            score=0,
+            level=0
         )
 
         doador2 = Donator(
@@ -64,7 +74,9 @@ def seed_data():
             name="Nicolas Fernandes",
             surname="da silva",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
-            telephone="11912345678"
+            telephone="11912345678",
+            score=0,
+            level=0
         )
 
         doador3 = Donator(
@@ -72,7 +84,9 @@ def seed_data():
             name="Pedro Silva Albuquerque",
             surname="de fernandes",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
-            telephone="11912345678"
+            telephone="11912345678",
+            score=0,
+            level=0
         )
 
         doador4 = Donator(
@@ -80,7 +94,9 @@ def seed_data():
             name="Giovani Nascimento",
             surname="quatro",
             hashed_password="$2b$12$2UGp20WpjEaU7VJiBw4oYO.Um9JlcX6E7PphX1fnLqe8g2MKjxJvO",
-            telephone="11912345678"
+            telephone="11912345678",
+            score=0,
+            level=0
         )
 
         retirador1 = Collector(
@@ -136,7 +152,8 @@ def seed_data():
             day_available="sabado",
             telephone="11992391923",
             is_available=True,
-            donator=doador1
+            donator=doador1,
+            last_donation_date=date.today()
         )
 
         oil2 = Oil(
@@ -149,7 +166,8 @@ def seed_data():
             day_available="domingo",
             telephone="11992391923",
             is_available=True,
-            donator=doador2
+            donator=doador2,
+            last_donation_date=date.today()
         )
 
         oil3 = Oil(
@@ -162,7 +180,8 @@ def seed_data():
             day_available="quarta-feira",
             telephone="11992391923",
             is_available=False,
-            donator=doador3
+            donator=doador3,
+            last_donation_date=date.today()
         )
 
         oil4 = Oil(
@@ -175,7 +194,8 @@ def seed_data():
             day_available="sabado",
             telephone="11992391923",
             is_available=True,
-            donator=doador4
+            donator=doador4,
+            last_donation_date=date.today()
         )
 
         db.add(oil1)

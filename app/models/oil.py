@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Date
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import date
 
 from models.base import Base
 
@@ -26,7 +26,7 @@ class Oil(Base):
     day_available = Column(String, nullable=True)
     is_available = Column(Boolean, nullable=False)
     
-    last_donation_date = Column(Date, default=datetime.now())
+    last_donation_date = Column(Date, default=date.today())
 
     # relationships
     donator = relationship("Donator", back_populates="oil", uselist=False)

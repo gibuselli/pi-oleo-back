@@ -14,8 +14,8 @@ class Donator(User):
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
     telephone = Column(String, nullable=True)
-    score = Column(Integer, nullable=False)
-    level = Column(Integer, nullable=False)
+    score = Column(Integer, default=0)
+    level = Column(Integer, default=0)
 
     oil = relationship("Oil", back_populates="donator", uselist=False)
 

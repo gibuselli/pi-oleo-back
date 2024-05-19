@@ -53,7 +53,7 @@ def update_oil_donation(oil: Oil, request: OilRequest, db: Session, donator: Don
         if hasattr(oil, field):
             setattr(oil, field, value)
             
-    oil.last_donation_date = datetime.now()            
+    oil.last_donation_date = datetime.today().strftime('%Y-%m-%d')        
             
     update_user_score(db, donator, request.oil_quantity)
 
@@ -118,7 +118,7 @@ def get_donator_score(db: Session, user: User):
     donator = get_donator_by_user_id(user.id)
     last_donation = donator.oil.last_donation_date
     
-    current_datetime = datetime.now()
+    current_datetime = datetime.today().strftime('%Y-%m-%d')
     
     one_month_ago = current_datetime - relativedelta(months=1)
     
