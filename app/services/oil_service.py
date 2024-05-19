@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 from models.oil import OilRequest, Oil, OilDonationResponse
 from models.oil_collect import OilCollectRequest, OilCollect
-from models.user import User, Donator
-from models.donator import DonatorScoreResponse
+from models.user import User
+from models.donator import Donator, DonatorScoreResponse
 
 from services.user_service import get_donator_by_user_id, update_user_score
 
