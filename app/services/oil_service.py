@@ -46,6 +46,7 @@ def create_oil_donation(request: OilRequest, db: Session, user: User):
         db.add(new_oil)
     except:
         db.merge(new_oil)
+        
     db.commit()
 
 def update_oil_donation(oil: Oil, request: OilRequest, db: Session, donator: Donator):
@@ -53,9 +54,9 @@ def update_oil_donation(oil: Oil, request: OilRequest, db: Session, donator: Don
         if hasattr(oil, field):
             setattr(oil, field, value)
             
-    oil.last_donation_date = datetime.today().strftime('%Y-%m-%d')        
+    oil.last_donation_date = datetime.today().date()       
             
-    update_user_score(db, donator, request.oil_quantity)
+    update_user_score(donator, request.oil_quantity)
 
     db.commit()
 
@@ -115,15 +116,28 @@ def get_available_oil_by_district(district: str, db: Session):
     
     
 def get_donator_score(user: User, db: Session):
+    existing_oil: Optional[Oil] = db.query(Oil).filter(Oil.donator_id == user.id).first()
+    
+    if not existing_oil:
+        return DonatorScoreResponse(
+            score=0,
+            is_old=True,
+            level=0)
+        
+    
     donator = get_donator_by_user_id(db, user.id)
+    
     last_donation = donator.oil.last_donation_date
     
-    current_datetime = datetime.today().strftime('%Y-%m-%d')
+    current_datetime = datetime.today().date()
     
     one_month_ago = current_datetime - relativedelta(months=1)
     
     is_old = last_donation < one_month_ago
     
-    return DonatorScoreResponse(donator.score, is_old, donator.level)
+    return DonatorScoreResponse(
+        score=donator.score,
+        is_old=is_old,
+        level=donator.level)
     
     
