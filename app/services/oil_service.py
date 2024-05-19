@@ -114,7 +114,7 @@ def get_available_oil_by_district(district: str, db: Session):
     ]
     
     
-def get_donator_score(db: Session, user: User):
+def get_donator_score(user: User, db: Session):
     donator = get_donator_by_user_id(db, user.id)
     last_donation = donator.oil.last_donation_date
     
