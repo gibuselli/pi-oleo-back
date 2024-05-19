@@ -9,10 +9,21 @@ from services.auth_service import hash_password
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
+def get_donator_by_user_id(db: Session, user_id: int) -> Donator:
+    return db.query(Donator).filter(Donator.id == user_id).first()
+
 
 def get_delivery_collectors(db: Session):
     collectors = db.query(Collector).filter(Collector.allow_delivery).all()
     return convert_list_to_response(collectors)
+
+def update_user_score(donator: Donator, donated_oil: int):
+    donator.score += donated_oil
+    
+    donator_level = donator.score // 10
+    
+    donator.level = donator_level
+    
 
 
 def create_donator(db: Session, request: DonatorRequest):
@@ -23,7 +34,9 @@ def create_donator(db: Session, request: DonatorRequest):
         surname=request.surname,
         email=request.email,
         hashed_password=hashed_password,
-        telephone=request.telephone
+        telephone=request.telephone,
+        score=0,
+        level=0
     )
 
     db.add(new_donator)

@@ -1,8 +1,9 @@
 from typing import Optional
 
 from pydantic import BaseModel
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Date
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 from models.base import Base
 
@@ -12,15 +13,20 @@ class Oil(Base):
 
     id = Column(Integer, primary_key=True)
     donator_id = Column(Integer, ForeignKey('donator.id'), nullable=False)
+    
     oil_quantity = Column(Integer, nullable=False)
+    
     cep = Column(String, nullable=False)
     district = Column(String, nullable=False)
     address = Column(String, nullable=False)
     address_number = Column(String, nullable=False)
     complement = Column(String, nullable=True)
-    day_available = Column(String, nullable=True)
     telephone = Column(String, nullable=True)
+    
+    day_available = Column(String, nullable=True)
     is_available = Column(Boolean, nullable=False)
+    
+    last_donation_date = Column(Date, default=datetime.now())
 
     # relationships
     donator = relationship("Donator", back_populates="oil", uselist=False)

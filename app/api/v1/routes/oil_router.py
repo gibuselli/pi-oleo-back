@@ -5,6 +5,7 @@ from models.oil_collect import OilCollectRequest
 from models.user_type import UserType
 from db.database import get_db
 from models.oil import OilRequest, OilDonationResponse
+from models.donator import DonatorScoreResponse
 from models.user import User
 from services import oil_service, auth_service
 
@@ -76,6 +77,14 @@ def get_oil_donation(current_user: User = Depends(auth_service.get_current_user)
     verify_user_type(UserType.DONATOR.value, current_user)
 
     return oil_service.get_oil_donation(current_user, db)
+
+@router.get(path="/score/",
+            description="Consulta a pontuação do usuário",
+            response_model=DonatorScoreResponse)
+def get_donator_score(current_user: User = Depends(auth_service.get_current_user), db: Session = Depends(get_db)):
+    verify_user_type(UserType.DONATOR.value, current_user)
+
+    return oil_service.get_donator_score(current_user, db)
 
 
 def verify_user_type(user_type: str, current_user: User):
