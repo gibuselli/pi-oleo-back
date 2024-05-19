@@ -12,7 +12,6 @@ class Collector(User):
     id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     name = Column(String)
     document = Column(String)
-    telephone = Column(String)
     cep = Column(String)
     address = Column(String)
     district = Column(String)

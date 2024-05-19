@@ -13,7 +13,6 @@ class Donator(User):
     id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
-    telephone = Column(String, nullable=True)
     score = Column(Integer, default=0)
     level = Column(Integer, default=0)
 
