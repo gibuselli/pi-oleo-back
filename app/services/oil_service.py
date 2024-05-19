@@ -19,7 +19,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 def create_oil_donation(request: OilRequest, db: Session, user: User):
-    donator = get_donator_by_user_id(user.id)
+    donator = get_donator_by_user_id(db, user.id)
     
     existing_oil: Optional[Oil] = db.query(Oil).filter(Oil.donator_id == user.id).first()
 
@@ -115,7 +115,7 @@ def get_available_oil_by_district(district: str, db: Session):
     
     
 def get_donator_score(db: Session, user: User):
-    donator = get_donator_by_user_id(user.id)
+    donator = get_donator_by_user_id(db, user.id)
     last_donation = donator.oil.last_donation_date
     
     current_datetime = datetime.today().strftime('%Y-%m-%d')
